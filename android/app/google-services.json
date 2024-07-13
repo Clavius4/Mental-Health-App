@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652906483451",
+    "project_id": "heet-2d9e3",
+    "storage_bucket": "heet-2d9e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652906483451:android:04de96d637d722665b6a5e",
+        "android_client_info": {
+          "package_name": "com.heet.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY_5ITmK93hMxIspJcwIXtujbBL327EfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

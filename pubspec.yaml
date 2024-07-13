@@ -1,0 +1,65 @@
+name: heet
+description: A new Flutter project.
+version: 1.0.0+1
+environment: 
+  sdk: '>=2.17.0 <3.0.0'
+dependencies: 
+  flutter: 
+    sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
+  cached_network_image: ^3.3.0
+  flutter_svg: ^2.0.9
+  provider: ^6.1.1
+  shared_preferences: ^2.2.3
+  connectivity_plus: ^5.0.2
+  intl: ^0.18.0
+  stylish_bottom_bar: ^1.1.0
+  firebase_core: ^3.0.0
+  firebase_auth: ^5.0.0
+  tflite_flutter: ^0.9.0
+  firebase_database: ^11.0.0
+  connectivity: ^3.0.6
+  get: ^4.6.6
+  url_launcher: ^6.3.0
+  cloud_firestore: ^5.0.2
+dev_dependencies:
+  flutter_test: 
+    sdk: flutter
+flutter: 
+  uses-material-design: true
+  assets: 
+    - assets/
+    - assets/images/
+    - assets/anxiety_model.tflite
+
+
+  fonts: 
+    - family: Montserrat
+      fonts: 
+        - asset: assets/fonts/MontserratSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/MontserratMedium.ttf
+          weight: 500
+    - family: Epilogue
+      fonts: 
+        - asset: assets/fonts/EpilogueRomanSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/EpilogueMedium.ttf
+          weight: 400
+        - asset: assets/fonts/EpilogueSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/EpilogueBold.ttf
+          weight: 700
+        - asset: assets/fonts/EpilogueRegular.ttf
+          weight: 400
+        - asset: assets/fonts/EpilogueExtraBold.ttf
+          weight: 800
+    - family: Alegreya
+      fonts: 
+        - asset: assets/fonts/AlegreyaMedium.ttf
+          weight: 500
+    - family: Rubik
+      fonts: 
+        - asset: assets/fonts/RubikRomanRegular.ttf
+          weight: 400
