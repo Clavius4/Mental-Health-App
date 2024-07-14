@@ -1,31 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:heet/presentation/profile_screen/terms.dart';
-import '../../core/app_export.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:provider/provider.dart';
 import '../../services/authService.dart';
 import 'faqs.dart';
+import 'terms.dart';
 import 'provider/profile_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key})
-      : super(
-          key: key,
-        );
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
+
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ProfileProvider(),
-      child: ProfileScreen(),
+      child: const ProfileScreen(),
     );
   }
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  String? _firstName;
+  String? _lastName;
+  String? _emailAddress;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  void _loadUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DatabaseReference userRef = _database.ref().child('users').child(user.uid);
+
+      // Fetching user data
+      DataSnapshot snapshot = await userRef.get();
+
+      if (snapshot.value != null) {
+        Map<String, dynamic> userData = Map<String, dynamic>.from(snapshot.value as Map);
+
+        setState(() {
+          _firstName = userData['firstName'];
+          _lastName = userData['lastName'];
+          _emailAddress = user.email;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Profile")),
+      appBar: AppBar(
+        title: const Center(child: Text("Profile")),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -40,7 +73,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               title: 'Personal Information',
               subtitle: 'Name, Age, Gender, etc.',
               onTap: () {
-
+                // Implement navigation to personal information screen
               },
             ),
             _buildProfileTile(
@@ -62,9 +95,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               title: 'Terms and Conditions',
               subtitle: 'Read the terms and conditions',
               onTap: () {
-                // Implement navigation to notifications settings screen
                 Navigator.push(context, MaterialPageRoute(builder: (context) => TermsAndConditionsScreen()));
-
               },
             ),
             _buildProfileTile(
@@ -72,9 +103,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               title: 'Help & Support',
               subtitle: 'FAQs, Contact support',
               onTap: () {
-                // Implement navigation to help and support screen
                 Navigator.push(context, MaterialPageRoute(builder: (context) => FAQScreen()));
-
               },
             ),
             _buildProfileTile(
@@ -95,26 +124,26 @@ class ProfileScreenState extends State<ProfileScreen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage('assets/images/profile_picture.png'), // Replace with your profile image asset
+              // backgroundImage: AssetImage('assets/images/profile_picture.png'), // Replace with your profile image asset
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              'John Doe',
-              style: TextStyle(
+              '${_firstName ?? ''} ${_lastName ?? ''}',
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
-              'john.doe@example.com',
-              style: TextStyle(
+              _emailAddress ?? '',
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
@@ -198,95 +227,6 @@ class ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _showThemeSelectionDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Select Theme'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              RadioListTile<String>(
-                title: const Text('Light'),
-                value: 'light',
-                groupValue: 'selectedTheme', // This should be a state variable
-                onChanged: (String? value) {
-                  // Update the theme state
-                  Navigator.pop(context);
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('Dark'),
-                value: 'dark',
-                groupValue: 'selectedTheme', // This should be a state variable
-                onChanged: (String? value) {
-                  // Update the theme state
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showLanguageSelectionDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Select Language'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              RadioListTile<String>(
-                title: const Text('English'),
-                value: 'english',
-                groupValue: 'selectedLanguage', // This should be a state variable
-                onChanged: (String? value) {
-                  // Update the language state
-                  Navigator.pop(context);
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('Swahili'),
-                value: 'swahili',
-                groupValue: 'selectedLanguage', // This should be a state variable
-                onChanged: (String? value) {
-                  // Update the language state
-                  Navigator.pop(context);
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('French'),
-                value: 'french',
-                groupValue: 'selectedLanguage', // This should be a state variable
-                onChanged: (String? value) {
-                  // Update the language state
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void _showLogoutDialog() {
     showDialog(
       context: context,
@@ -312,8 +252,4 @@ class ProfileScreenState extends State<ProfileScreen> {
       },
     );
   }
-}
-
-class SharedAppBar {
-  const SharedAppBar();
 }

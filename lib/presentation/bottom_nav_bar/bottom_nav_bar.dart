@@ -62,8 +62,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           backgroundColor: Colors.blue,
         ),
         BottomBarItem(
-          icon: Icon(Icons.settings),
-          title: Text('Patient Details'),
+          icon: Icon(Icons.history),
+          title: Text('Diagnosis History'),
           backgroundColor: Colors.blue,
         ),
         BottomBarItem(

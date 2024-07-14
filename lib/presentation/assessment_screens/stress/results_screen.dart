@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:heet/presentation/assessment_screens/appointments_screen.dart';
+import 'package:heet/presentation/home_screen/home_screen.dart';
+
+import '../../bottom_nav_bar/bottom_nav_bar.dart';
 
 class Results1Screen extends StatelessWidget {
   final String results;
@@ -15,17 +18,18 @@ class Results1Screen extends StatelessWidget {
       body: Center(
         child: Text(
           results,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 16),
           textAlign: TextAlign.center,
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => AppointmentsScreen(),
+              builder: (context) => BottomNavScreen(),
             ),
+                (route) => false, // This condition removes all previous routes
           );
         },
         label: Text('Go Home'),

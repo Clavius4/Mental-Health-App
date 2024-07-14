@@ -66,7 +66,7 @@ class HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: appTheme.gray50,
-          appBar: _buildAppBar(context),
+          // appBar: _buildAppBar(context),
           body: SingleChildScrollView(
             child: SizedBox(
               width: double.maxFinite,
@@ -131,54 +131,6 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      height: 70.v,
-      leadingWidth: 60.h,
-      leading: AppbarLeadingCircleimage(
-        imagePath: ImageConstant.imgEllipse2,
-        margin: EdgeInsets.only(
-          left: 25.h,
-          top: 1.v,
-        ),
-      ),
-      actions: [
-        Container(
-          height: 30.v,
-          width: 32.h,
-          margin: EdgeInsets.only(
-            left: 12.h,
-            right: 12.h,
-            bottom: 5.v,
-          ),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgVector,
-                height: 20.v,
-                width: 19.h,
-                alignment: Alignment.bottomLeft,
-                margin: EdgeInsets.only(
-                  top: 10.v,
-                  right: 13.h,
-                ),
-              ),
-              CustomImageView(
-                imagePath: ImageConstant.imgVectorGray800,
-                height: 3.v,
-                width: 4.h,
-                alignment: Alignment.topCenter,
-                margin: EdgeInsets.fromLTRB(7.h, 7.v, 21.h, 20.v),
-              ),
-            ],
-          ),
-        )
-      ],
     );
   }
 

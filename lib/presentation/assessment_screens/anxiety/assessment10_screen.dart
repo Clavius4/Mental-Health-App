@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/assessment_controller.dart';
@@ -10,27 +12,57 @@ class Assessment10Screen extends StatefulWidget {
 
 class _Assessment10ScreenState extends State<Assessment10Screen> {
   final AssessmentController controller = Get.find();
+  final DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+  final FirebaseAuth auth = FirebaseAuth.instance;
   int? _selectedChoice;
 
   @override
   Widget build(BuildContext context) {
-    void _submitAnswers() {
-      if (_selectedChoice != null) {
-        controller.updateAnswer(15, _selectedChoice!);
-        print(controller.answers);
+    Future<void> _submitAnswers() async {
+      User? user = auth.currentUser;
 
-        // Assess the disease and get results
-        String results = controller.assessDisease('Anxiety'); // Change disease as needed
+      if (_selectedChoice != null && user != null) {
+        // Fetch user's email from the 'users' collection in Firebase Realtime Database
+        DataSnapshot snapshot = await dbRef.child('users')
+            .child(user.uid)
+            .get();
 
-        // Navigate to ResultsScreen with the computed results
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ResultsScreen(results: results),
-          ),
-        );
-      } else {
-        Get.snackbar('Error', 'Please select an answer before submitting.', colorText: Colors.red);
+        if (snapshot.exists) {
+          String email = snapshot
+              .child('emailAddress')
+              .value
+              .toString();
+
+          controller.updateAnswer(15, _selectedChoice!);
+          print(controller.answers);
+
+          // Assess the disease and get results
+          String results = controller.assessDisease(
+              'Anxiety'); // Change disease as needed
+
+          // Save results to Firebase Realtime Database
+          dbRef.child('assessment_results').push().set({
+            'user': email,
+            'result': results,
+            'timestamp': DateTime.now().toIso8601String(),
+          }).then((_) {
+            Get.snackbar('Success', 'Successfully saved results:',
+                colorText: Colors.green);
+            // Navigate to ResultsScreen with the computed results
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultsScreen(results: results),
+              ),
+            );
+          }).catchError((error) {
+            Get.snackbar('Error', 'Failed to save results: $error',
+                colorText: Colors.red);
+          });
+        } else {
+          Get.snackbar('Error', 'Please select an answer before submitting.',
+              colorText: Colors.red);
+        }
       }
     }
 

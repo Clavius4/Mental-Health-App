@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../presentation/log_in_screen/log_in_screen.dart';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -39,8 +41,13 @@ class AuthService {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     try {
       await _auth.signOut();
-      Navigator.of(context).pushReplacementNamed('/login');
-    } catch (e) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogInScreen(),
+        ),
+            (route) => false, // This condition removes all previous routes
+      );    } catch (e) {
       print("Error signing out: $e");
     }
   }
