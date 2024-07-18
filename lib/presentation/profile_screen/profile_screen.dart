@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:heet/presentation/log_in_screen/log_in_screen.dart';
+import 'package:heet/presentation/profile_screen/personal_info_details.dart';
+import 'package:heet/presentation/profile_screen/settings.dart';
 import 'package:provider/provider.dart';
-import '../../services/authService.dart';
+import 'change_password_dialog.dart';
 import 'faqs.dart';
 import 'terms.dart';
 import 'provider/profile_provider.dart';
+
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -71,23 +76,42 @@ class ProfileScreenState extends State<ProfileScreen> {
             _buildProfileTile(
               icon: Icons.person,
               title: 'Personal Information',
-              subtitle: 'Name, Age, Gender, etc.',
+              subtitle: 'Name, Phone, email, etc.',
               onTap: () {
-                // Implement navigation to personal information screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PersonalInformationScreen(),
+                  ),
+                );
               },
             ),
             _buildProfileTile(
               icon: Icons.lock,
               title: 'Change Password',
               subtitle: 'Update your password',
-              onTap: _showChangePasswordDialog,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ChangePasswordDialog();
+                  },
+                );
+              },
             ),
+
             _buildProfileTile(
               icon: Icons.settings,
               title: 'Settings',
-              subtitle: 'Account settings, Preferences',
+              subtitle: 'Account settings',
               onTap: () {
                 // Implement navigation to settings screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsScreen(),
+                  ),
+                );
               },
             ),
             _buildProfileTile(
@@ -179,54 +203,6 @@ class ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _showChangePasswordDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Change Password'),
-          content: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Current Password',
-                ),
-              ),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'New Password',
-                ),
-              ),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Confirm New Password',
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            TextButton(
-              child: const Text('Change'),
-              onPressed: () {
-                // Implement change logic
-                Navigator.of(context).pop();
-                // Optionally, add a function to handle the password update
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void _showLogoutDialog() {
     showDialog(
       context: context,
@@ -243,7 +219,10 @@ class ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 // Implement logout functionality
                 Navigator.of(context).pop();
-                AuthService.logout(context);
+                FirebaseAuth.instance.signOut().then((value) => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()))
+                });
+                // AuthService.logout(context);
               },
               child: const Text('Logout'),
             ),
@@ -252,4 +231,8 @@ class ProfileScreenState extends State<ProfileScreen> {
       },
     );
   }
+
+
+
+
 }

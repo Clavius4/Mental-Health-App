@@ -86,48 +86,48 @@ class AssessmentController extends GetxController {
   String categorizeDepressionScore(double score) {
     if (score < 5) {
       return '''
-Minimal or No Depression
-Based on your responses, it appears that you have minimal or no signs of depression. This is a positive indication, and no immediate treatment is necessary. However, it’s important to maintain your mental well-being. Here are a few tips:
-- Continue engaging in activities you enjoy.
-- Maintain a healthy lifestyle, including regular exercise, balanced nutrition, and sufficient sleep.
-- Monitor your mood and if you notice any changes or worsening symptoms, consider re-evaluating with the PHQ-9 or seeking further advice.
-- Schedule periodic check-ins with a healthcare provider to ensure your mental health remains stable.
+**Minimal or No Depression**
+You have minimal or no signs of depression.
+Maintain your mental well-being.
+Engage in enjoyable activities.
+Maintain a healthy lifestyle.
+Monitor mood and schedule periodic check-ins.
     ''';
     } else if (score < 10) {
       return '''
-Mild Depression
-Your responses suggest mild depression. While this level of depression often doesn’t require intensive treatment, it’s important to take steps to prevent worsening. Here’s what you can do:
-- Engage in regular physical activity, which can help improve mood.
-- Ensure you are getting adequate sleep and maintain good sleep hygiene by having a consistent bedtime routine.
-- Consider brief counseling sessions, which can provide support and strategies to manage symptoms.
-- Schedule a follow-up evaluation in a few weeks to reassess your symptoms. If you notice any increase in the severity of your symptoms, seek further help.
+**Mild Depression**
+You have mild depression.
+Engage in regular physical activity.
+Maintain good sleep hygiene.
+Consider brief counseling.
+Schedule a follow-up evaluation.
     ''';
     } else if (score < 15) {
       return '''
-Moderate Depression
-Your responses indicate moderate depression. This level of depression can impact your daily life and may require more active treatment. Here are my recommendations:
-- Begin with regular psychotherapy sessions, such as cognitive-behavioral therapy (CBT), which can help you manage and reduce your symptoms.
-- You might also benefit from medications that can help balance the chemicals in your brain that affect mood.
-- Consider seeing a mental health professional who can work with you to develop a treatment plan tailored to your needs.
-- Monitor your progress and make sure to have regular follow-up appointments to adjust your treatment as necessary.
+**Moderate Depression**
+You have moderate depression.
+Consider regular psychotherapy sessions.
+Medications may help balance brain chemicals.
+See a mental health professional.
+Monitor progress with regular follow-ups.
     ''';
     } else if (score < 20) {
       return '''
-Moderately Severe Depression
-Your responses suggest you have moderately severe depression. It’s important to address this level of depression promptly to prevent further impact on your life. Here’s what you should do:
-- Start treatment with antidepressant medication, which can help alleviate symptoms.
-- Engage in regular, intensive psychotherapy sessions to explore and address underlying issues and develop coping strategies.
-- I strongly recommend seeing a mental health specialist, such as a psychiatrist or psychologist, to provide comprehensive care.
-- Keep track of your symptoms and make sure to have regular check-ins to monitor your progress and adjust treatment as needed.
+**Moderately Severe Depression**
+You have moderately severe depression.
+Start treatment with antidepressant medication.
+Engage in intensive psychotherapy.
+See a mental health specialist.
+Monitor symptoms with regular check-ins.
     ''';
     } else {
       return '''
-Severe Depression
-Your responses indicate severe depression, which requires immediate and intensive treatment to ensure your safety and well-being. Here are the steps you should take:
-- Begin immediate treatment with both antidepressant medication and intensive psychotherapy.
-- Seek an urgent referral to a psychiatrist or mental health specialist who can provide specialized care.
-- If you have any thoughts of self-harm or feel unable to care for yourself, please seek emergency help immediately. Consider the possibility of inpatient treatment to ensure you receive the necessary support and care.
-- Regularly monitor your symptoms and have frequent follow-up appointments to adjust your treatment plan as needed.
+**Severe Depression**
+You have severe depression.
+Begin immediate treatment with medication and therapy.
+Seek a referral to a mental health specialist.
+If thoughts of self-harm occur, seek emergency help.
+Regularly monitor symptoms and adjust treatment.
     ''';
     }
   }
@@ -135,38 +135,39 @@ Your responses indicate severe depression, which requires immediate and intensiv
   String categorizeAnxietyScore(double score) {
     if (score < 5) {
       return '''
-Minimal Anxiety
-Your responses suggest minimal anxiety, which is a good sign. There is no need for specific treatment at this time. However, maintaining a healthy lifestyle can help prevent future anxiety. Here are some recommendations:
-- Practice regular stress management techniques such as mindfulness or deep breathing exercises.
-- Continue to engage in activities you enjoy and find relaxing.
-- Monitor your anxiety levels, and if you notice an increase in symptoms, consider reassessing with the GAD-7 or seeking further advice.
+**Minimal Anxiety**
+You have minimal anxiety.
+Maintain a healthy lifestyle.
+Engage in enjoyable activities.
+Practice stress management techniques.
+Monitor anxiety levels.
     ''';
     } else if (score < 10) {
       return '''
-Mild Anxiety
-Your responses indicate mild anxiety. This level of anxiety is common and can often be managed with some simple strategies:
-- Monitor your symptoms and schedule a follow-up assessment in a few weeks.
-- Engage in regular physical activity and ensure you are getting enough sleep.
-- Practice relaxation techniques such as deep breathing, meditation, or yoga.
-- Consider brief counseling sessions to develop strategies for managing anxiety.
+**Mild Anxiety**
+You have mild anxiety.
+Monitor symptoms and reassess in a few weeks.
+Engage in regular physical activity.
+Practice relaxation techniques.
+Consider brief counseling.
     ''';
     } else if (score < 15) {
       return '''
-Moderate Anxiety
-Your responses suggest moderate anxiety, which can affect your daily life. Here are my recommendations:
-- Consider starting cognitive-behavioral therapy (CBT) or another form of psychotherapy to help manage your anxiety.
-- Medications may also be beneficial. Discuss with a healthcare provider whether this is appropriate for you.
-- It might be helpful to see a mental health professional who can provide a comprehensive evaluation and treatment plan.
-- Regularly monitor your symptoms and schedule follow-up appointments to track your progress.
+**Moderate Anxiety**
+You have moderate anxiety.
+Consider starting psychotherapy.
+Medications may be beneficial.
+See a mental health professional.
+Monitor symptoms and schedule follow-ups.
     ''';
     } else {
       return '''
-Severe Anxiety
-Your responses indicate severe anxiety, which requires immediate and comprehensive treatment. Here’s what you should do:
-- Begin treatment with medications to help manage your anxiety symptoms.
-- Engage in intensive psychotherapy, such as CBT, to address and manage your anxiety.
-- I strongly recommend seeing a mental health specialist for a thorough evaluation and tailored treatment plan.
-- If your anxiety is significantly impacting your ability to function, consider seeking urgent help. Regular monitoring and follow-up are crucial to ensure your treatment is effective.
+**Severe Anxiety**
+You have severe anxiety.
+Begin treatment with medications.
+Engage in intensive psychotherapy.
+See a mental health specialist.
+Seek urgent help if anxiety affects functioning.
     ''';
     }
   }
@@ -174,28 +175,30 @@ Your responses indicate severe anxiety, which requires immediate and comprehensi
   String categorizeStressScore(double score) {
     if (score < 14) {
       return '''
-Low Stress
-Your responses suggest that you have low perceived stress, which is a positive indication for your overall well-being. Here’s how to maintain this:
-- Continue with your current lifestyle, ensuring it includes activities that you enjoy and find relaxing.
-- Practice regular stress management techniques, such as mindfulness or deep breathing exercises.
-- Maintain a balanced diet, regular exercise, and adequate sleep.
+**Low Stress**
+You have low perceived stress.
+Maintain your current lifestyle.
+Engage in enjoyable and relaxing activities.
+Practice stress management techniques.
+Maintain a balanced diet and regular exercise.
     ''';
     } else if (score < 27) {
       return '''
-Moderate Stress
-Your responses indicate moderate stress. This level of stress can impact your health and well-being, so it’s important to manage it effectively. Here’s what you can do:
-- Practice mindfulness and relaxation techniques such as yoga, meditation, or deep breathing exercises.
-- Make lifestyle changes to reduce stress, such as regular physical activity, a healthy diet, and ensuring you get enough sleep.
-- Consider brief counseling or psychoeducation sessions to develop effective stress management strategies.
+**Moderate Stress**
+You have moderate stress.
+Practice mindfulness and relaxation techniques.
+Make lifestyle changes to reduce stress.
+Consider brief counseling.
+Monitor and manage stress effectively.
     ''';
     } else {
       return '''
-High Stress
-Your responses suggest high levels of perceived stress, which can significantly impact your health and daily functioning. It’s important to address this promptly. Here’s what you should do:
-- Engage in intensive stress management programs or workshops that focus on coping strategies and stress reduction techniques.
-- Consider seeking counseling or therapy to address underlying issues contributing to your high stress levels.
-- Practice advanced stress management techniques tailored to your specific stressors.
-- It’s essential to monitor your stress levels and schedule follow-up appointments to track your progress and adjust your stress management plan as needed.
+**High Stress**
+You have high perceived stress.
+Engage in intensive stress management programs.
+Seek counseling to address underlying issues.
+Practice advanced stress management techniques.
+Monitor stress levels and schedule follow-ups.
     ''';
     }
   }

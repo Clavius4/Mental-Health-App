@@ -31,95 +31,97 @@ class StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 40.v),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgGraphicpart,
-                height: 347.v,
-                width: 343.h,
-                alignment: Alignment.centerRight,
-              ),
-              SizedBox(height: 58.v),
-              Padding(
-                padding: EdgeInsets.only(left: 46.h),
-                child: Text(
-                  "lbl_we_are_here".tr,
-                  style: theme.textTheme.titleLarge,
+        body: SingleChildScrollView(
+          child: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(vertical: 40.v),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomImageView(
+                  imagePath: ImageConstant.imgGraphicpart,
+                  height: 347.v,
+                  width: 343.h,
+                  alignment: Alignment.centerRight,
                 ),
-              ),
-              SizedBox(height: 12.v),
-              Container(
-                width: 262.h,
-                margin: EdgeInsets.only(left: 46.h),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "lbl_welcome_to".tr,
-                        style: theme.textTheme.titleSmall,
-                      ),
-                      TextSpan(
-                        text: "msg_heet_our_app_is".tr,
-                        style: CustomTextStyles.bodyMediumNicoMojiPrimary,
-                      )
-                    ],
+                SizedBox(height: 58.v),
+                Padding(
+                  padding: EdgeInsets.only(left: 46.h),
+                  child: Text(
+                    "lbl_we_are_here".tr,
+                    style: theme.textTheme.titleLarge,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-              ),
-              SizedBox(height: 59.v),
-              Align(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    onTapRowsignup(context);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 39.h),
-                    decoration: AppDecoration.outlinePrimary.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder5,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                SizedBox(height: 12.v),
+                Container(
+                  width: 262.h,
+                  margin: EdgeInsets.only(left: 46.h),
+                  child: RichText(
+                    text: TextSpan(
                       children: [
-                        CustomElevatedButton(
-                          onPressed: () {
-                            onTapRowlogin(context);
-                          },
-                          width: 147.h,
-                          text: "lbl_login".tr,
-                          buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                        TextSpan(
+                          text: "lbl_welcome_to".tr,
+                          style: theme.textTheme.titleSmall,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 47.h,
-                            top: 17.v,
-                            bottom: 13.v,
-                          ),
-                          child: Text(
-                            "lbl_signup".tr,
-                            style: CustomTextStyles.titleSmallSemiBold,
-                          ),
+                        TextSpan(
+                          text: "msg_heet_our_app_is".tr,
+                          style: CustomTextStyles.bodyMediumNicoMojiPrimary,
                         )
                       ],
                     ),
+                    textAlign: TextAlign.left,
                   ),
                 ),
-              ),
-              SizedBox(height: 70.v),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "msg_app_version_1_0_0".tr,
-                  style: theme.textTheme.labelMedium,
+                SizedBox(height: 59.v),
+                Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: () {
+                      onTapRowsignup(context);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 39.h),
+                      decoration: AppDecoration.outlinePrimary.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder5,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          CustomElevatedButton(
+                            onPressed: () {
+                              onTapRowlogin(context);
+                            },
+                            width: 147.h,
+                            text: "lbl_login".tr,
+                            buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 47.h,
+                              top: 17.v,
+                              bottom: 13.v,
+                            ),
+                            child: Text(
+                              "lbl_signup".tr,
+                              style: CustomTextStyles.titleSmallSemiBold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              SizedBox(height: 5.v)
-            ],
+                SizedBox(height: 70.v),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "msg_app_version_1_0_0".tr,
+                    style: theme.textTheme.labelMedium,
+                  ),
+                ),
+                SizedBox(height: 5.v)
+              ],
+            ),
           ),
         ),
       ),

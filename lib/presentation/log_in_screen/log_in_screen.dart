@@ -82,9 +82,9 @@ class LogInScreenState extends State<LogInScreen> {
                           ),
                           decoration: AppDecoration.fillRed,
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            // mainAxisSize: MainAxisSize.min,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            // mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Spacer(),
                               Container(

@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
-import '../../widgets/app_bar/appbar_leading_circleimage.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../journals/journals.dart';
 import 'provider/home_provider.dart';
@@ -190,21 +189,23 @@ class HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            CustomElevatedButton(
-              height: 62.v,
-              width: 170.h,
-              text: "Reports".tr,
-              margin: EdgeInsets.only(left: 15.h),
-              leftIcon: Container(
-                margin: EdgeInsets.only(right: 6.h),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgIcroundarticle,
-                  height: 24.v,
-                  width: 26.h,
+            GestureDetector(
+              child: CustomElevatedButton(
+                height: 62.v,
+                width: 170.h,
+                text: "Reports".tr,
+                margin: EdgeInsets.only(left: 15.h),
+                leftIcon: Container(
+                  margin: EdgeInsets.only(right: 6.h),
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgIcroundarticle,
+                    height: 24.v,
+                    width: 26.h,
+                  ),
                 ),
+                buttonStyle: CustomButtonStyles.fillGray,
+                buttonTextStyle: CustomTextStyles.labelMediumEpilogueGray800,
               ),
-              buttonStyle: CustomButtonStyles.fillGray,
-              buttonTextStyle: CustomTextStyles.labelMediumEpilogueGray800,
             )
           ],
         ),

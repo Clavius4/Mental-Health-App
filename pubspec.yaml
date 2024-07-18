@@ -23,6 +23,7 @@ dependencies:
   get: ^4.6.6
   url_launcher: ^6.3.0
   cloud_firestore: ^5.0.2
+  easy_url_launcher: ^0.0.7
 dev_dependencies:
   flutter_test: 
     sdk: flutter

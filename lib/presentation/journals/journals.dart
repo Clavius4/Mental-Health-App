@@ -1,5 +1,7 @@
+import 'package:easy_url_launcher/easy_url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+
 
 class JournalsScreen extends StatelessWidget {
   final List<Journal> journals = [
@@ -31,10 +33,9 @@ class JournalsScreen extends StatelessWidget {
           final journal = journals[index];
           return GestureDetector(
             onTap: () async {
-              final uri = Uri.parse(journal.url);
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri, mode: LaunchMode.externalApplication);
-              } else {
+              try {
+                await EasyLauncher.url(url: journal.url);
+              } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Could not launch ${journal.url}')),
                 );
